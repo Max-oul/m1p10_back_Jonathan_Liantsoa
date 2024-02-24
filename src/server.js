@@ -27,6 +27,8 @@ app.use(express.urlencoded({ extended: true }));
 //middleware for routing
 //app.use('/api/v1/users', require('./routes'));
 app.use('/api/v1/users', require('./routes/user.route'));
+app.use('/api/v1/profile', require('./routes/profile.route'));
+app.use('/api/v1/appointment', require('./routes/appointment.route'));
 
 
 //errror handling middleware
