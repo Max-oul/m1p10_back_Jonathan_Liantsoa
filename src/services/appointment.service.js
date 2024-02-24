@@ -7,7 +7,11 @@ const createAppointment = async (userId, appointmentData) => {
       ...appointmentData,
     );
     await appointment.save();
-    return appointment;
+    const populatedAppointment = await Appointment.findById(appointment._id)
+      .populate("userId")
+      .populate("serviceId")
+      .populate("employeeId");
+    return populatedAppointment;
   } catch (error) {
     throw new Error("Internal Server Error");
   }
@@ -61,8 +65,6 @@ const getAppointmentById = async (id) => {
     throw new Error("Internal Server Error");
   }
 };
-
-
 
 module.exports = {
   createAppointment,

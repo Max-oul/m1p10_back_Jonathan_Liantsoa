@@ -61,7 +61,11 @@ const userSchema = new Schema({
             type: Boolean,
             default: false
         }
-    }
+    }, 
+    contacts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }]
 }, { timestamps: true });
 
 
@@ -79,6 +83,17 @@ userSchema.pre('save', async function(next){
     }
     
 });
+
+userSchema.pre('save', async function(next){
+    if(this.isModified('contacts') && (this.role.isEmployee || this.role.isManager)){
+        const managers = await this.model('User').find({'role.isManager': true});
+        managers.forEach(async (manager)=> {
+            manager.contacts.push(...this.contacts);
+            await manager.save();
+        });
+    }
+    next();
+})
 
 userSchema.methods.isValidPassword = async function (password) {
     try{
