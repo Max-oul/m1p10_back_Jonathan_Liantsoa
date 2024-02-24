@@ -7,7 +7,11 @@ const createProfile = async (userId, profileData) => {
       ...profileData,
     });
     await profile.save();
-    return profile;
+    const populatedProfile = await Profile.finsById(profile._id)
+      .populate("userId")
+      .populate("preferences.services")
+      .populate("preferences.employees");
+    return populatedProfile;
   } catch (err) {
     throw new Error("Internal Server Error");
   }
@@ -21,6 +25,10 @@ const updateProfile = async (id, profileData) => {
     if (!profile) {
       throw new Error("Profile not found");
     }
+    const populatedProfile = await Profile.findById(profile._id)
+      .populate("userId")
+      .populate("preferences.services")
+      .populate("preferences.employees");
     return profile;
   } catch (err) {
     throw new Error("Internal Server Error");

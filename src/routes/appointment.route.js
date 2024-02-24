@@ -23,7 +23,7 @@ router.get('/:id', authMiddleware, async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 });
-
+roi
 router.get('/', authMiddleware, async (req, res) => {
     try {
         const appointments = await getAppointment();

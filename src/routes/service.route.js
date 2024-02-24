@@ -5,6 +5,10 @@ const {createService, getAllServices, getServiceById, updateService, deleteServi
 
 router.post('/', authMiddleware, async (req, res) => {
     try {
+        //only the manager can create a service 
+        if(!req.user.role.isManager){
+            throw new Error('You are not authorized to create a service');
+        }
         const service = await createService(req.body);
         res.json(service);
     }catch(err){
@@ -14,6 +18,9 @@ router.post('/', authMiddleware, async (req, res) => {
 
 router.get('/', authMiddleware, async (req, res) => {
     try {
+        if(!req.user.role.isManager){
+            throw new Error('You are not authorized to create a service');
+        }
         const services = await getAllServices();
         res.json(services);
     } catch (error){
@@ -23,6 +30,9 @@ router.get('/', authMiddleware, async (req, res) => {
 
 router.get('/:id', authMiddleware, async (req, res) => {
     try {
+        if(!req.user.role.isManager){
+            throw new Error('You are not authorized to create a service');
+        }
         const service = await getServiceById(req.params.id);
         res.json(service);
     } catch (error){
@@ -32,6 +42,9 @@ router.get('/:id', authMiddleware, async (req, res) => {
 
 router.delete('/:id', authMiddleware, async (req, res) => {
     try {
+        if(!req.user.role.isManager){
+            throw new Error('You are not authorized to create a service');
+        }
         const service = await deleteService(req.params.id);
         res.json(service);
     } catch (error){
@@ -41,6 +54,9 @@ router.delete('/:id', authMiddleware, async (req, res) => {
 
 router.put('/:id', authMiddleware, async (req, res) => {
     try{
+        if(!req.user.role.isManager){
+            throw new Error('You are not authorized to create a service');
+        }
         const service = await updateService(req.params.id, req.body);
         res.json(service);
     } catch (error){

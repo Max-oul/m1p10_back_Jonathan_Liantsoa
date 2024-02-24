@@ -14,7 +14,6 @@ const authMiddleware = async (req, res, next) => {
         if (!user) {
             throw new Error();
         }
-        //Attach the user information and token to the request object so it can be used in the routes
         req.user = user;
         req.token = token;
         next();
