@@ -19,10 +19,6 @@ const AppointmentSchema = new mongoose.Schema({
   appointmentDate: {
     type: Date,
     required: true
-  }, 
-  delay: {
-    type: Number,
-    required: true
   },
   status: {
     type: String,
