@@ -1,5 +1,5 @@
 const express = require('express');
-const authMiddleware = require('../middleware/auth');
+const authMiddleware = require('../middleware/auth.middleware');
 const { createAppointment, getAppointment, deleteAppointment, getAppointmentById, getAppointment, updateAppointment } = require('../services/appointment.service');
 const router = express.Router();
 
