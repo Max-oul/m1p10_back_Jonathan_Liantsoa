@@ -63,4 +63,9 @@ router.get('/:id', authMiddleware, async(req, res) => {
     }
 })
 
+router.get('/protected', authMiddleware, (req, res) => {
+    const userId = req.user.userId;
+    res.json({ message: 'Protected route accessed', userId });
+});
+
 module.exports = router;
