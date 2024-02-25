@@ -1,6 +1,6 @@
 const express = require('express');
 const authMiddleware = require('../middleware/auth.middleware');
-const { createAppointment, getAppointment, deleteAppointment, getAppointmentById, getAppointment, updateAppointment } = require('../services/appointment.service');
+const { createAppointment, getAppointment, deleteAppointment, getAppointmentById, updateAppointment } = require('../services/appointment.service');
 const router = express.Router();
 
 
@@ -23,7 +23,7 @@ router.get('/:id', authMiddleware, async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 });
-roi
+
 router.get('/', authMiddleware, async (req, res) => {
     try {
         const appointments = await getAppointment();
@@ -50,3 +50,5 @@ router.put('/:id', authMiddleware, async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 });
+
+module.exports = router;

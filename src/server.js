@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/v1/users', require('./routes/user.route'));
 app.use('/api/v1/profile', require('./routes/profile.route'));
 app.use('/api/v1/appointment', require('./routes/appointment.route'));
-app.use('api/v1/service', require('./routes/service.route'));
+app.use('/api/v1/service', require('./routes/service.route'));
 
 
 //errror handling middleware
