@@ -18,32 +18,23 @@ const loginUser =  async (email , password) => {
         const token = jwt.sign({userId: user._id} ,process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES_IN});
         return {user, token};
 
-    }catch(err){
-        throw new Error('Internal server error');
+    }catch(error){
+        throw err;
     }
 }
 
 const registerUser = async (userData) => {
     try{
-        const {f_name, l_name, phone, address, email, password, role } = userData;
-        const existingUser = await User.findOne({email});
+        const existingUser = await User.findOne({email: userData.email});
         if(existingUser){
             throw new Error('User already exists');
         }
-        const newUser = new User({
-            f_name, 
-            l_name, 
-            phone,
-            address,
-            email,
-            password,
-            role,
-        });
+        const newUser = new User(userData);
         await newUser.save();
-        const token = jwt.sign({userId: user._id} ,process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES_IN});
+        const token = jwt.sign({userId: newUser._id} ,process.env.JWT_SECRET, {expiresIn: process.env.JWT_EXPIRES_IN});
         return { newUser, token };
     } catch (error){
-        throw new Error('Internal server error')
+        throw error;
     }
 }
 
@@ -52,7 +43,7 @@ const updateUser = async (userId, userData) => {
         const updatedUser = await User.findByIdAndUpdate(userId, userData, { new: true });
         return updatedUser;
     } catch (error) {
-        throw new Error('Internal server error');
+        throw error;
     }
 }
 
@@ -61,7 +52,7 @@ const deleteUser = async (userId) => {
         const deletedUser = await User.findByIdAndDelete(userId);
         return deletedUser;
     } catch (error) {
-        throw new Error('Internal server error');
+        throw error;
     }
 }
 
@@ -70,7 +61,7 @@ const getUserById = async (userId) => {
         const user = await User.findById(userId);
         return user;
     } catch (error) {
-        throw new Error('Internal server error');
+        throw error;
     }
 }
 
@@ -79,7 +70,7 @@ const getUser = async () => {
         const users = await User.find();
         return users;
     } catch (error) {
-        throw new Error('Internal server error');
+        throw error;
     }
 }
 

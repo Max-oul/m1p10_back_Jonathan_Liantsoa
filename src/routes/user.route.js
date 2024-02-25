@@ -24,14 +24,14 @@ router.post('/register', async(req, res) => {
 });
 
 router.put('/update/:id', authMiddleware, async(req, res) => {
-    try{
-        const { id } = req.params;
-        const {f_name, l_name, phone, address, email, password, role } = req.body;
-        const updatedUser = await updateUser(id, {f_name, l_name, phone, address, email, password, role });
-        res.status(200).json(updatedUser); 
+   if(req.user._id.toString() !== req.params.id){
+        return res.status(401).json({error: 'You can only update your own information'});
+   } try {
+        const updatedUser = await updateUser(req.params.id, req.body);
+        res.status(200).json(updatedUser);
     } catch (error){
         res.status(400).json({error: error.message});
-    }
+   }
 });
 
 router.delete('/:id', authMiddleware, async(req, res) => {

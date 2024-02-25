@@ -10,7 +10,7 @@ router.post('/', authMiddleware, async (req, res) => {
             throw new Error('You are not authorized to create a service');
         }
         const service = await createService(req.body);
-        res.json(service);
+        res.status(200).json(service);
     }catch(err){
         res.status(400).json({eroor: error.message});
     }
@@ -22,7 +22,7 @@ router.get('/', authMiddleware, async (req, res) => {
             throw new Error('You are not authorized to create a service');
         }
         const services = await getAllServices();
-        res.json(services);
+        res.status(200).json(services);
     } catch (error){
         res.status(400).json({ error: error.message });
     }
@@ -34,7 +34,7 @@ router.get('/:id', authMiddleware, async (req, res) => {
             throw new Error('You are not authorized to create a service');
         }
         const service = await getServiceById(req.params.id);
-        res.json(service);
+        res.status(200).json(service);
     } catch (error){
         res.status(400).json({ error: error.message });
     }
@@ -46,7 +46,7 @@ router.delete('/:id', authMiddleware, async (req, res) => {
             throw new Error('You are not authorized to create a service');
         }
         const service = await deleteService(req.params.id);
-        res.json(service);
+        res.status(200).json(service);
     } catch (error){
         res.status(400).json({ error: error.message });
     }
@@ -58,7 +58,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
             throw new Error('You are not authorized to create a service');
         }
         const service = await updateService(req.params.id, req.body);
-        res.json(service);
+        res.status(200).json(service);
     } catch (error){
         res.status(400).json({ error: error.message });
     }

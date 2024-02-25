@@ -13,7 +13,7 @@ router.post("/", authMiddleware, async (req, res) => {
               throw new Error("You are not authorized to perform this action");
          }
          const profile = await createProfile(req.user._id, req.body);
-         res.json(profile);
+         res.status(200).json(profile);
    }catch(error){
        res.status(400).json({error: error.message});
    }
@@ -26,7 +26,7 @@ router.put("/:id", authMiddleware, async (req, res) => {
                throw new Error("You are not authorized to perform this action");
           }
           const profile = await updateProfile(req.params.id, req.body);
-          res.json(profile);
+          res.status(200).json(profile);
     }catch(error){
         res.status(400).json({error: error.message});
     }
@@ -39,7 +39,7 @@ router.put("/:id", authMiddleware, async (req, res) => {
                throw new Error("You are not authorized to perform this action");
           }
           const profile = await deleteProfile(req.params.id);
-          res.json(profile);
+          res.status(200).json(profile);
     }catch(error){
         res.status(400).json({error: error.message});
     }
@@ -52,7 +52,7 @@ router.get("/", authMiddleware, async (req, res) => {
                throw new Error("You are not authorized to perform this action");
           }
           const profile = await getProfile();
-          res.json(profile);
+          res.status(200).json(profile);
     }catch(error){
         res.status(400).json({error: error.message});
     }
@@ -65,7 +65,7 @@ router.get("/", authMiddleware, async (req, res) => {
                throw new Error("You are not authorized to perform this action");
           }
           const profile = await getProfileById(req.params.id);
-          res.json(profile);
+          res.status(200).json(profile);
     }catch(error){
         res.status(400).json({error: error.message});
     }
