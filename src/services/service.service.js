@@ -6,7 +6,7 @@ const createService = async (serviceData) => {
     await service.save();
     return service;
   } catch (error) {
-    throw new Error("Internal Server Error");
+    throw error;
   }
 };
 
@@ -18,7 +18,7 @@ const updateService = async (id, serviceData) => {
     }
     return service;
   } catch (error) {
-    throw new Error("Internal Server Error");
+    throw error;
   }
 };
 
@@ -30,7 +30,7 @@ const deleteService = async (id) => {
     }
     return service;
   } catch (error) {
-    throw new Error("Internal Server Error");
+    throw error;
   }
 };
 
@@ -39,7 +39,7 @@ const getAllServices = async () => {
     const services = await Service.find({});
     return services;
   } catch (error) {
-    throw new Error("Internal Server Error");
+    throw error;
   }
 };
 
@@ -51,7 +51,7 @@ const getServiceById = async (id) => {
     }
     return service;
   } catch (error) {
-    throw new Error("Internal Server Error");
+    throw error;
   }
 };
 

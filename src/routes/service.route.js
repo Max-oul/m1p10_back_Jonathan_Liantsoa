@@ -5,14 +5,13 @@ const {createService, getAllServices, getServiceById, updateService, deleteServi
 
 router.post('/', authMiddleware, async (req, res) => {
     try {
-        //only the manager can create a service 
         if(!req.user.role.isManager){
             throw new Error('You are not authorized to create a service');
         }
         const service = await createService(req.body);
         res.status(200).json(service);
-    }catch(err){
-        res.status(400).json({eroor: error.message});
+    }catch(error){
+        res.status(400).json({error: error.message});
     }
 });
 

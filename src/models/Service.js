@@ -5,14 +5,18 @@ const ServiceSchema = new mongoose.Schema({
         type: String,
         required: true, 
     },
-    delay: {
-        type: Date,
-        required: true,
-    }, 
     price: {
         type: Number,
         required: true,
     },
+    duration: {
+        type: Number,
+        required: true,
+    },
+    commission: {
+        type: Number,
+        required: true,
+    }
 }, {timestamps: true});
 
 
