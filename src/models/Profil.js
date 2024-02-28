@@ -13,7 +13,7 @@ const profileSchema = new mongoose.Schema({
         }],
         employees: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'Employee'
+            ref: 'User'
         }]
     }
 }, { timestamps: true });

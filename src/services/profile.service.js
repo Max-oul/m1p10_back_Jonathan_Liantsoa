@@ -7,13 +7,13 @@ const createProfile = async (userId, profileData) => {
       ...profileData,
     });
     await profile.save();
-    const populatedProfile = await Profile.finsById(profile._id)
+    const populatedProfile = await Profile.findById(profile._id)
       .populate("userId")
       .populate("preferences.services")
       .populate("preferences.employees");
     return populatedProfile;
-  } catch (err) {
-    throw new Error("Internal Server Error");
+  } catch (error) {
+    throw error;
   }
 };
 
@@ -30,8 +30,8 @@ const updateProfile = async (id, profileData) => {
       .populate("preferences.services")
       .populate("preferences.employees");
     return profile;
-  } catch (err) {
-    throw new Error("Internal Server Error");
+  } catch (error) {
+    throw new error;
   }
 };
 
@@ -42,8 +42,8 @@ const deleteProfile = async (id) => {
       throw new Error("Profile not found");
     }
     return profile;
-  } catch (err) {
-    throw new Error("Internal Server Error");
+  } catch (error) {
+    throw error;
   }
 };
 
@@ -52,7 +52,7 @@ const getProfile = async () => {
     const profile = await Profile.find();
     return profile;
   } catch (err) {
-    throw new Error("Internal Server Error");
+    throw error;
   }
 };
 
@@ -64,7 +64,7 @@ const getProfileById = async (id) => {
     }
     return profile;
   } catch (err) {
-    throw new Error("Internal Server Error");
+    throw  error;
   }
 };
 

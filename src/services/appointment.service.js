@@ -1,10 +1,9 @@
 const Appointment = require("../models/Appointment");
 
-const createAppointment = async (userId, appointmentData) => {
+const createAppointment = async (appointmentData) => {
   try {
     const appointment = new Appointment(
-      userId,
-      ...appointmentData,
+      appointmentData
     );
     await appointment.save();
     const populatedAppointment = await Appointment.findById(appointment._id)

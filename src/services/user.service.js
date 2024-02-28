@@ -19,7 +19,7 @@ const loginUser =  async (email , password) => {
         return {user, token};
 
     }catch(error){
-        throw err;
+        throw error;
     }
 }
 

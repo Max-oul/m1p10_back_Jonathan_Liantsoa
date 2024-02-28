@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post('/', authMiddleware, async (req, res) => {
     try {
-        const appointment = await createAppointment(req.user._id, req.body);
+        const appointment = await createAppointment(req.body);
         res.json(appointment);
     } catch (error){
         res.status(400).json({ error: error.message });
